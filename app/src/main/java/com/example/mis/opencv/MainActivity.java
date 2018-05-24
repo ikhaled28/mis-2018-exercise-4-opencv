@@ -140,7 +140,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
             //https://www.tutorialspoint.com/opencv/opencv_drawing_circle.htm
             Imgproc.circle(col,
                 new Point(nosesArray[i].x + nosesArray[i].width*0.5 ,nosesArray[i].y + nosesArray[i].height*0.5),
-                (int) Math.ceil(nosesArray[i].width*.25),
+                (int) (nosesArray[i].width*.25),
                 new Scalar(255,0,0),
                 -1);
 
