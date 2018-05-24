@@ -14,9 +14,9 @@ import org.opencv.android.JavaCameraView;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
-import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
@@ -63,7 +63,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 
     //https://www.mirkosertic.de/blog/2013/07/realtime-face-detection-on-android-using-opencv/
     //http://opencvfacedetect.blogspot.de/2010/10/face-detectionfollowed-by-eyesnose.html
-    
+
     public MainActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
     }
@@ -110,11 +110,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
     }
 
     public void onCameraViewStarted(int width, int height) {
-
-        //grayscaleImage = new Mat(height, width, CvType.CV_8UC4);
-        // The faces will be a 20% of the height of the screen
         absoluteFaceSize = (int) (height * 0.2);
-
     }
 
     public void onCameraViewStopped() {
@@ -141,11 +137,12 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 
         Rect[] nosesArray = noses.toArray();
         for (int i = 0; i <nosesArray.length; i++)
+            //https://www.tutorialspoint.com/opencv/opencv_drawing_circle.htm
             Imgproc.circle(col,
-                new Point(nosesArray[i].x + nosesArray[i].width/2 ,nosesArray[i].y + nosesArray[i].height/2),
-                (int) Math.ceil(nosesArray[i].width/4),
+                new Point(nosesArray[i].x + nosesArray[i].width*0.5 ,nosesArray[i].y + nosesArray[i].height*0.5),
+                (int) Math.ceil(nosesArray[i].width*.25),
                 new Scalar(255,0,0),
-                -2);
+                -1);
 
         return col;
     }
